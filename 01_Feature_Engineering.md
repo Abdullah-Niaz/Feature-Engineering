@@ -26,6 +26,8 @@ Features are the attributes or columns in a dataset.
 
 ---
 
+## Feature Transformer & Imputation
+
 ### Missing Value Imputation
 
 Sometimes, while collecting data, there may be missing values due to errors or omissions by data collectors.
@@ -65,6 +67,103 @@ This step is important because some machine learning algorithms are sensitive to
 For instance, a feature representing **age** might range from 20–60, while a **salary** feature might range from 10,000–100,000.
 In such cases, the model may give undue importance to the larger-valued feature unless scaling is applied.
 
+
 ---
 
-Let me know if you'd like this in a downloadable format like PDF or Markdown!
+## Feature Construction
+
+Feature construction is the process of creating new features from the existing ones in the dataset to improve model performance.
+
+**Why it's important:**
+
+* Raw data may not always provide all the useful patterns needed for a model to learn.
+* Constructed features can capture hidden relationships or domain-specific insights.
+
+**Examples:**
+
+* Creating a **BMI** feature using `weight / height²` from existing `weight` and `height` columns.
+* Extracting **day, month, year** from a single `date` column.
+* Combining `first_name` and `last_name` to create a `full_name` feature.
+* From a `timestamp`, creating features like `is_weekend`, `hour_of_day`, etc.
+
+**Tools/Libraries:**
+You can manually create features using Python or use tools like:
+
+* `Feature-engine`
+* `Featuretools` (for automated feature construction)
+
+---
+
+## Feature Selection
+
+Feature selection is the process of selecting the most relevant features and removing irrelevant or redundant ones.
+
+**Why it's important:**
+
+* Reduces overfitting by removing noise.
+* Improves model accuracy and reduces training time.
+* Makes the model simpler and easier to interpret.
+
+**Types of Feature Selection Methods:**
+
+1. **Filter Methods**
+   Use statistical techniques to score features:
+
+   * Correlation matrix
+   * Chi-square test
+   * Mutual information
+
+2. **Wrapper Methods**
+   Use a machine learning model to test subsets of features:
+
+   * Recursive Feature Elimination (RFE)
+   * Forward/Backward Feature Selection
+
+3. **Embedded Methods**
+   Feature selection is part of the model training:
+
+   * Lasso (L1 Regularization)
+   * Decision Trees and Random Forests (feature importance)
+
+---
+
+## 📦 Feature Extraction
+
+Feature extraction is the process of transforming raw data into a set of new features that can be used  for machine learning.
+It’s especially useful when the original data is in an unstructured form (like text or images).
+
+**Why it's important:**
+
+* Helps in dimensionality reduction.
+* Extracts the most informative components of data.
+* Useful when dealing with high-dimensional data.
+
+**Examples:**
+
+* **From Text Data:**
+
+  * Extracting word counts or TF-IDF values from documents.
+  * Using NLP techniques like word embeddings (Word2Vec, GloVe).
+
+* **From Images:**
+
+  * Using Convolutional Neural Networks (CNNs) to extract features like edges, shapes, textures.
+
+* **From Audio:**
+
+  * Extracting Mel Frequency Cepstral Coefficients (MFCCs).
+
+* **From Raw Numeric Data:**
+
+  * Principal Component Analysis (PCA)
+  * Linear Discriminant Analysis (LDA)
+
+---
+
+### Summary Table:
+
+| Step                 | Purpose                                | Example                                |
+| -------------------- | -------------------------------------- | -------------------------------------- |
+| Feature Construction | Create new features from existing ones | `bmi = weight / height²`               |
+| Feature Selection    | Pick the most important features       | Removing low-correlation features      |
+| Feature Extraction   | Transform data into usable features    | Extracting keywords from a text column |
