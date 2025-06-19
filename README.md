@@ -6,4 +6,4 @@
    * outliers detection
    * handling categoral values
   
-2. Feature Destruction 
+2. Feature Construction 
