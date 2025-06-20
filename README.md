@@ -6,4 +6,7 @@
    * outliers detection
    * handling categoral values
   
-2. Feature Construction 
+2. Feature Construction
+3. Feature Selection
+4. Feature Extraction
+
