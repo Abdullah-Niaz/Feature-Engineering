@@ -1,0 +1,156 @@
+## 🌟 1. **Normalization (Min-Max Scaling)**
+
+### 📌 Concept:
+
+Min-Max scaling (also called **Normalization**) transforms features to a **fixed range**, usually **0 to 1**, or sometimes **-1 to 1**.
+
+---
+
+### 📐 Formula:
+
+$$
+X_{\text{scaled}} = \frac{X - X_{\min}}{X_{\max} - X_{\min}}
+$$
+
+- $X$: Original value
+- $X_{\min}$: Minimum value in the feature
+- $X_{\max}$: Maximum value in the feature
+
+---
+
+### 💡 Why Use Min-Max Scaling?
+
+- When **all features need to be on the same scale**, especially for algorithms using **distance metrics** (e.g., KNN, K-Means).
+- Used when the **distribution is not Gaussian** (not normal).
+- Works best when **data is bounded**.
+
+---
+
+### 🔢 Example:
+
+Let’s say we have a dataset with one feature `Age`:
+
+| Sample | Age |
+| ------ | --- |
+| A      | 18  |
+| B      | 25  |
+| C      | 30  |
+| D      | 50  |
+
+**Step 1**: Find min and max:
+
+- Min = 18
+- Max = 50
+
+**Step 2**: Apply the formula:
+
+| Sample | Age | Normalized Age            |
+| ------ | --- | ------------------------- |
+| A      | 18  | $(18-18)/(50-18) = 0.0$   |
+| B      | 25  | $(25-18)/(50-18) = 0.22$  |
+| C      | 30  | $(30-18)/(50-18) = 0.375$ |
+| D      | 50  | $(50-18)/(50-18) = 1.0$   |
+
+---
+
+### 🛠 Code Example:
+
+```python
+from sklearn.preprocessing import MinMaxScaler
+import pandas as pd
+
+data = {'Age': [18, 25, 30, 50]}
+df = pd.DataFrame(data)
+
+scaler = MinMaxScaler()
+df['Normalized Age'] = scaler.fit_transform(df[['Age']])
+print(df)
+```
+
+---
+
+## 🌟 2. **Standardization (Z-Score or Z-Indexing)**
+
+### 📌 Concept:
+
+Standardization transforms the data to have **zero mean** and **unit variance (standard deviation = 1)**.
+Also known as **Z-score normalization**.
+
+---
+
+### 📐 Formula:
+
+$$
+Z = \frac{X - \mu}{\sigma}
+$$
+
+- $X$: Original value
+- $\mu$: Mean of the feature
+- $\sigma$: Standard deviation of the feature
+
+---
+
+### 💡 Why Use Standardization?
+
+- When **data is normally distributed** (bell curve).
+- Needed for algorithms like **Logistic Regression**, **SVM**, **Linear Regression**, etc.
+- More robust to **outliers** than min-max.
+
+---
+
+### 🔢 Example:
+
+Let’s say the same `Age` column:
+
+| Sample | Age |
+| ------ | --- |
+| A      | 18  |
+| B      | 25  |
+| C      | 30  |
+| D      | 50  |
+
+**Step 1**: Calculate mean and std:
+
+- Mean $\mu = \frac{18+25+30+50}{4} = 30.75$
+- Std Dev $\sigma \approx 12.38$
+
+**Step 2**: Apply formula:
+
+| Sample | Age | Z-Score (Standardized Age)         |
+| ------ | --- | ---------------------------------- |
+| A      | 18  | $(18 - 30.75)/12.38 \approx -1.03$ |
+| B      | 25  | $(25 - 30.75)/12.38 \approx -0.46$ |
+| C      | 30  | $(30 - 30.75)/12.38 \approx -0.06$ |
+| D      | 50  | $(50 - 30.75)/12.38 \approx 1.55$  |
+
+---
+
+### 🛠 Code Example:
+
+```python
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
+
+data = {'Age': [18, 25, 30, 50]}
+df = pd.DataFrame(data)
+
+scaler = StandardScaler()
+df['Standardized Age'] = scaler.fit_transform(df[['Age']])
+print(df)
+```
+
+---
+
+## 🔄 Summary Table
+
+| Technique       | Range              | Sensitive to Outliers? | When to Use                                       |
+| --------------- | ------------------ | ---------------------- | ------------------------------------------------- |
+| Min-Max Scaling | 0 to 1 (or custom) | ✅ Yes                 | When data is not Gaussian; bounded                |
+| Standardization | -∞ to ∞            | ❌ Less Sensitive      | When data is Gaussian; required by many ML models |
+
+---
+
+### 🔍 Visual Difference (Quick Idea):
+
+- **Min-Max** squashes everything between 0 and 1.
+- **Standardization** shifts data to center around 0 with unit variance.
