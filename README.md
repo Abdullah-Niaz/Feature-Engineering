@@ -74,5 +74,3 @@ Open the notebooks in JupyterLab or Google Colab to explore the techniques inter
 **Abdullah Niaz**
 
 Connect with me on [GitHub](https://github.com/Abdullah-Niaz)
-
----
