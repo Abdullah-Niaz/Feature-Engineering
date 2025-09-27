@@ -69,7 +69,7 @@ Open the notebooks in JupyterLab or Google Colab to explore the techniques inter
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Author  
 
 **Abdullah Niaz**
 
